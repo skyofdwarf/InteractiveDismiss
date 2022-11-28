@@ -17,7 +17,7 @@ extension YourModalViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
-extension YourModalViewController: InteractiveDismissPresenting {
+extension YourModalViewController: InteractiveDismissPresentationDelegate {
     public var nestedScrollView: UIScrollView? { scrollView }
 }
 

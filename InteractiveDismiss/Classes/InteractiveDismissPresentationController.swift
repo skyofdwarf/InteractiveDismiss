@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol InteractiveDismissPresenting {
+public protocol InteractiveDismissPresentationDelegate {
     var nestedScrollView: UIScrollView? { get }
 }
 
@@ -74,7 +74,7 @@ open class InteractiveDismissPresentationController: UIPresentationController {
     }
     
     @objc func handlePanning(_ panGestureRecognizer: UIPanGestureRecognizer) {
-        if let presenting = presentedViewController as? InteractiveDismissPresenting,
+        if let presenting = presentedViewController as? InteractiveDismissPresentationDelegate,
            let scrollView = presenting.nestedScrollView {
             handlePanning(scrollView: scrollView, recognizer: panGestureRecognizer)
         } else {
@@ -223,7 +223,7 @@ open class InteractiveDismissPresentationController: UIPresentationController {
         observer?.invalidate()
         observer = nil
         
-        if let presenting = presentedViewController as? InteractiveDismissPresenting,
+        if let presenting = presentedViewController as? InteractiveDismissPresentationDelegate,
            let scrollView = presenting.nestedScrollView {
             observer = scrollView.observe(\.contentOffset, options: [.old, .new]) { [weak self] scrollView, change in
                 self?.processObserving(scrollView, change: change)
@@ -248,7 +248,7 @@ extension InteractiveDismissPresentationController: UIGestureRecognizerDelegate 
     }
     
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let presenting = presentedViewController as? InteractiveDismissPresenting,
+        if let presenting = presentedViewController as? InteractiveDismissPresentationDelegate,
            let scrollView = presenting.nestedScrollView {
             
             let location = scrollView.convert(gestureRecognizer.location(in: nil), from: nil)

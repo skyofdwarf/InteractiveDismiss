@@ -15,7 +15,7 @@ extension TableViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
-extension TableViewController: InteractiveDismissPresenting {
+extension TableViewController: InteractiveDismissPresentationDelegate {
     public var nestedScrollView: UIScrollView? { tv }
 }
 
