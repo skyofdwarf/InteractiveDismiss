@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'InteractiveDismiss'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of InteractiveDismiss.'
+  s.version          = '0.5.0'
+  s.summary          = 'UIPresentationController subclass for interactive modal dismiss'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,8 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  InteractiveDismiss is a subclass of `UIPresentationController` for interactive modal dismiss.
+  It supports nested scroll views like UIScrollView, UITableView, and UICollectionView.
                        DESC
 
   s.homepage         = 'https://github.com/skyofdwarf/InteractiveDismiss'
