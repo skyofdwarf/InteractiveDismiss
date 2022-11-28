@@ -5,6 +5,28 @@
 [![License](https://img.shields.io/cocoapods/l/InteractiveDismiss.svg?style=flat)](https://cocoapods.org/pods/InteractiveDismiss)
 [![Platform](https://img.shields.io/cocoapods/p/InteractiveDismiss.svg?style=flat)](https://cocoapods.org/pods/InteractiveDismiss)
 
+InteractiveDismiss is a subclass of `UIPresentationController` for interactive modal dismiss
+
+To use InteractiveDismiss, just adopt `UIViewControllerTransitioningDelegate` protocol and return an instance of InteractiveDismiss in `presentationController(forPresented:presenting:source:)`.
+And then set .custom to `modalPresentationStyle` before calling `present(_:animated:completion)`.
+
+```swift
+extension YourModalViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        InteractiveDismissPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+func presentModal() {
+    let vc = YourModalViewController()
+    
+    vc.modalPresentationStyle = .custom
+    vc.transitioningDelegate = vc
+    
+    self.present(vc, animated: true)
+}
+```
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

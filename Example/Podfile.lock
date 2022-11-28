@@ -1,0 +1,16 @@
+PODS:
+  - InteractiveDismiss (0.1.0)
+
+DEPENDENCIES:
+  - InteractiveDismiss (from `../`)
+
+EXTERNAL SOURCES:
+  InteractiveDismiss:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  InteractiveDismiss: 3e76b3191ebae8b4371d38087c5a11576ac41585
+
+PODFILE CHECKSUM: 84f4e088c860848c6dbded57bfa6da4f3af5198d
+
+COCOAPODS: 1.11.3
