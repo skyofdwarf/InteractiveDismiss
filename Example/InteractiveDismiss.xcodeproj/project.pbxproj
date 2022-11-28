@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		48E3CE5C1A61DAD82B512C7F /* Pods_InteractiveDismiss_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C9414727448882F17D2F83 /* Pods_InteractiveDismiss_Example.framework */; };
+		569DA9AC293484C100D8AACC /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569DA9AB293484C100D8AACC /* TableViewController.swift */; };
+		569DA9AE293484D800D8AACC /* NonScrollableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569DA9AD293484D800D8AACC /* NonScrollableViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 		145C2B86D67391ED2D946B84 /* Pods-InteractiveDismiss_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InteractiveDismiss_Tests.debug.xcconfig"; path = "Target Support Files/Pods-InteractiveDismiss_Tests/Pods-InteractiveDismiss_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		2BD614C0D73C98E7387C1C0C /* Pods_InteractiveDismiss_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InteractiveDismiss_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FDAC0775542773431E1ABD5 /* InteractiveDismiss.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = InteractiveDismiss.podspec; path = ../InteractiveDismiss.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		569DA9AB293484C100D8AACC /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		569DA9AD293484D800D8AACC /* NonScrollableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonScrollableViewController.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* InteractiveDismiss_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InteractiveDismiss_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				569DA9AB293484C100D8AACC /* TableViewController.swift */,
+				569DA9AD293484D800D8AACC /* NonScrollableViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -332,6 +338,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				569DA9AC293484C100D8AACC /* TableViewController.swift in Sources */,
+				569DA9AE293484D800D8AACC /* NonScrollableViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

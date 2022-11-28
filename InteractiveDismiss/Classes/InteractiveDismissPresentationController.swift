@@ -26,6 +26,8 @@ open class InteractiveDismissPresentationController: UIPresentationController {
     private let panningView = PanningView()
     
     private var status: Status = .waiting
+    private var adjustsContentOffset: Bool = false
+    
     private let velocityThreshold: Double
     
     private var observer: NSKeyValueObservation?
@@ -41,14 +43,17 @@ open class InteractiveDismissPresentationController: UIPresentationController {
     func processObserving(_ scrollView: UIScrollView, change: NSKeyValueObservedChange<CGPoint>) {
         guard let presentedView else { return }
         
+        guard adjustsContentOffset else { return }
+        
         print("contentOffset.y: \(scrollView.contentOffset.y), state: \(panningView.panGestureRecognizer.state.rawValue), isDecelerating: \(scrollView.isDecelerating)")
         
         let topInset = scrollView.contentInset.top + scrollView.safeAreaInsets.top
         let zeroWithInset = CGPoint(x: 0, y: -topInset)
-                                    
+            
         switch status {
         case .cancelled(let stopDecelerating):
             status = .waiting
+            
             if stopDecelerating, scrollView.isDecelerating {
                 scrollView.setContentOffset(zeroWithInset, animated: false)
                 
@@ -88,18 +93,26 @@ open class InteractiveDismissPresentationController: UIPresentationController {
             break
             
         case .changed:
-            let translation = recognizer.translation(in: containerView)
-            let percentage = abs(max(0, translation.y) / containerView.bounds.height)
+            var delta: CGFloat = 0
             
-            var finalFrame = presentedView.frame
-            finalFrame.origin.y = percentage * containerView.bounds.height
+            if presentedView.frame.origin.y >= 0 {
+                let translation = recognizer.translation(in: containerView)
+                recognizer.setTranslation(translation, in: containerView)
+                
+                delta = translation.y
+            }
             
-            presentedView.frame = finalFrame
+            status = .panned(delta: delta)
+            
+            if delta > 0 {
+                var finalFrame = containerView.bounds
+                finalFrame.origin.y += delta
+                presentedView.frame = finalFrame
+            }
             
         case .ended:
             let velocity = recognizer.velocity(in: containerView)
-            let translation = recognizer.translation(in: containerView)
-            let percentage = abs(max(0, translation.y) / containerView.bounds.height)
+            let percentage = abs(max(0, presentedView.frame.origin.y) / containerView.bounds.height)
             
             var finished = false
             if velocity.y < -velocityThreshold {
@@ -111,14 +124,19 @@ open class InteractiveDismissPresentationController: UIPresentationController {
             }
             
             if finished {
+                status = .finished
                 presentedViewController.dismiss(animated: true)
             } else {
+                status = .cancelled(stopDecelerating: false)
+                
                 UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
                     presentedView.frame = containerView.bounds
                 }.startAnimation()
             }
             
         case .cancelled:
+            status = .cancelled(stopDecelerating: false)
+            
             UIViewPropertyAnimator(duration: 0.2, curve: .easeOut) {
                 presentedView.frame = containerView.bounds
             }.startAnimation()
@@ -236,12 +254,12 @@ extension InteractiveDismissPresentationController: UIGestureRecognizerDelegate 
             let location = scrollView.convert(gestureRecognizer.location(in: nil), from: nil)
             
             if scrollView.bounds.contains(location) {
+                adjustsContentOffset = true
                 return scrollView.contentOffset.y == -(scrollView.contentInset.top + scrollView.safeAreaInsets.top)
-            } else {
-                return true
             }
         }
         
+        adjustsContentOffset = false
         return true
     }
 }
